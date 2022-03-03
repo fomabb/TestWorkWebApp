@@ -3,6 +3,7 @@ package com.example.testing.service.impl;
 import com.example.testing.dao.UserDAO;
 import com.example.testing.dto.UserDataDTO;
 import com.example.testing.dto.UserRegistrationDTO;
+import com.example.testing.dto.UserUpdate;
 import com.example.testing.model.User;
 import com.example.testing.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +45,17 @@ public class UserServiceImpl implements UserService {
         user.setPassword(DigestUtils.md5Hex(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
         userDAO.userAdd(user);
+    }
+
+    @Override
+    public String  userDelete(long id) {
+        userDAO.userDelete(id);
+        return "delete user with id " + id;
+    }
+
+    @Override
+    public void updateUser(long id, UserUpdate user) {
+        getById(id);
+        userDAO.updateUser(id, user);
     }
 }
