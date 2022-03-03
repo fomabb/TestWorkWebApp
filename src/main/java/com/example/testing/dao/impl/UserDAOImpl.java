@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String GET_ALL_USER_SQL = "SELECT * FROM user";
     private static final String ADD_USER_SQL = "INSERT INTO user VALUES(0,?,?,?)";
     private static final String GET_BY_ID_SQL = "SELECT * FROM user WHERE user_id=?";
-    private static final String DELETE_USER_SQL = "DELETE FROM user WHERE user_id";
+    private static final String DELETE_USER_SQL = "DELETE FROM user WHERE user_id=?";
     private static final String UPDATE_USER_SQL = "UPDATE user SET login=? WHERE user_id=?";
 
     @Override
@@ -43,6 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void userDelete(long id) {
+        System.out.println(id);
         jdbcTemplate.update(DELETE_USER_SQL, id);
     }
 

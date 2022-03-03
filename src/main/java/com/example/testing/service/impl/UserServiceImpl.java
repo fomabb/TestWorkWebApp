@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String  userDelete(long id) {
+        System.out.println(id);
         userDAO.userDelete(id);
         return "delete user with id " + id;
     }
