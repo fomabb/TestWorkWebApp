@@ -5,6 +5,7 @@ import com.example.testing.dto.UserRegistrationDTO;
 import com.example.testing.dto.UserUpdate;
 import com.example.testing.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
+@Validated
 public class UserController {
 
     private final UserService userService;
@@ -32,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    void userRegistration(@RequestBody UserRegistrationDTO userRegistrationDTO) {
+    void userRegistration(@Validated @RequestBody UserRegistrationDTO userRegistrationDTO) {
         userService.userRegistration(userRegistrationDTO);
     }
 
@@ -42,7 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    void updateUser(@PathVariable long id, @RequestBody UserUpdate user) {
+    void updateUser(@Validated @PathVariable long id, @RequestBody UserUpdate user) {
         userService.updateUser(id, user);
     }
 }
