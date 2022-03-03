@@ -8,5 +8,7 @@ public interface UserDAO {
 
     List<User> getAllUser();
 
+    User getById(long id);
+
     void userAdd(User user);
 }

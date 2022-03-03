@@ -26,6 +26,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDataDTO getById(long id) {
+        UserDataDTO userDataDTO = new UserDataDTO();
+        User user = userDAO.getById(id);
+        userDataDTO.setUser_id(user.getUser_id());
+        userDataDTO.setLogin(user.getLogin());
+        userDataDTO.setPassword(user.getPassword());
+        userDataDTO.setEmail(user.getEmail());
+        return userDataDTO;
+    }
+
+    @Override
     public void userRegistration(UserRegistrationDTO userRegistrationDTO) {
         User user = new User();
         user.setLogin(userRegistrationDTO.getLogin());

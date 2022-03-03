@@ -25,6 +25,11 @@ public class UserController {
         return userService.getAllUser();
     }
 
+    @GetMapping("/{id}")
+    UserDataDTO getById(@PathVariable long id) {
+        return userService.getById(id);
+    }
+
     @PostMapping("/add")
     void userRegistration(@RequestBody UserRegistrationDTO userRegistrationDTO) {
         userService.userRegistration(userRegistrationDTO);
