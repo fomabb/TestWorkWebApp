@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<EmployeeDataDTO> getAllUser() {
+    public List<EmployeeDataDTO> getAllEmployee() {
         return userService.getAllEmployee();
     }
 
@@ -34,8 +34,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    void employeeRegistration(@Validated @RequestBody EmployeeRegistrationDTO userRegistrationDTO) {
-        userService.employeeRegistration(userRegistrationDTO);
+    void employeeRegistration(@Validated @RequestBody EmployeeRegistrationDTO employee) {
+        userService.employeeRegistration(employee);
     }
 
     @DeleteMapping("/{id}")

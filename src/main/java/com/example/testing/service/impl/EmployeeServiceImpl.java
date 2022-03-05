@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployerService {
 
-    private final EmployeeDAO userDAO;
+    private final EmployeeDAO employeeDAO;
 
     @Override
     public List<EmployeeDataDTO> getAllEmployee() {
-        return userDAO.getAllEmployee().stream()
+        return employeeDAO.getAllEmployee().stream()
                 .map(employee -> new EmployeeDataDTO(employee.getEmployee_id(), employee.getFirst_name(),
                         employee.getLast_name(), employee.getDepartment_id(), employee.getJob_title(),
                         employee.getGender()))
@@ -32,11 +32,12 @@ public class EmployeeServiceImpl implements EmployerService {
     @Override
     public EmployeeDataDTO getById(long id) {
         EmployeeDataDTO employeeDataDTO = new EmployeeDataDTO();
-        Employee employee = userDAO.getById(id);
+        Employee employee = employeeDAO.getById(id);
         employeeDataDTO.setEmployee_id(employee.getEmployee_id());
         employeeDataDTO.setFirst_name(employee.getFirst_name());
         employeeDataDTO.setLast_name(employee.getLast_name());
         employeeDataDTO.setDepartment_id(employee.getDepartment_id());
+        employeeDataDTO.setJob_title(employee.getJob_title());
         employeeDataDTO.setGender(employee.getGender().toUpperCase(Locale.ROOT));
 
 
@@ -44,20 +45,20 @@ public class EmployeeServiceImpl implements EmployerService {
     }
 
     @Override
-    public void employeeRegistration(EmployeeRegistrationDTO userRegistrationDTO) {
+    public void employeeRegistration(EmployeeRegistrationDTO employeeRegistrationDTO) {
         Employee employee = new Employee();
-        employee.setEmployee_id(employee.getEmployee_id());
-        employee.setFirst_name(employee.getFirst_name());
-        employee.setLast_name(employee.getLast_name());
-        employee.setDepartment_id(employee.getDepartment_id());
-        employee.setGender(employee.getGender().toUpperCase(Locale.ROOT));
+        employee.setFirst_name(employeeRegistrationDTO.getFirst_name());
+        employee.setLast_name(employeeRegistrationDTO.getLast_name());
+        employee.setDepartment_id(employeeRegistrationDTO.getDepartment_id());
+        employee.setJob_title(employeeRegistrationDTO.getJob_title());
+        employee.setGender(employeeRegistrationDTO.getGender());
 
-        userDAO.employeeAdd(employee);
+        employeeDAO.employeeAdd(employee);
     }
 
     @Override
     public String employeeDelete(long id) {
-        userDAO.employeeDelete(id);
+        employeeDAO.employeeDelete(id);
 
         return "delete employee with id " + id;
     }
@@ -66,6 +67,6 @@ public class EmployeeServiceImpl implements EmployerService {
     public void updateEmployee(long id, EmployeeUpdate employee) {
         getById(id);
 
-        userDAO.updateEmployee(id, employee);
+        employeeDAO.updateEmployee(id, employee);
     }
 }

@@ -38,6 +38,7 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public void employeeAdd(Employee employee) {
+//        System.out.println("1" + employee.toString());
         jdbcTemplate.update(ADD_USER_SQL, employee.getFirst_name(), employee.getLast_name(),
                 employee.getDepartment_id(), employee.getJob_title(), employee.getGender());
     }
