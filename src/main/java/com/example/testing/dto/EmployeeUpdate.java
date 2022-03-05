@@ -7,13 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDataDTO {
+public class EmployeeUpdate {
 
-    private long user_id;
+    private String department_id;
 
-    private String login;
-
-    private String password;
-
-    private String email;
+    private String job_title;
 }
