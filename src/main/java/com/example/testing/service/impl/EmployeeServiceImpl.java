@@ -51,7 +51,12 @@ public class EmployeeServiceImpl implements EmployerService {
         employee.setLast_name(employeeRegistrationDTO.getLast_name());
         employee.setDepartment_id(employeeRegistrationDTO.getDepartment_id());
         employee.setJob_title(employeeRegistrationDTO.getJob_title());
-        employee.setGender(employeeRegistrationDTO.getGender());
+        if (employeeRegistrationDTO.getGender().equalsIgnoreCase("MEN") ||
+                employeeRegistrationDTO.getGender().equalsIgnoreCase("WOMEN")) {
+            employee.setGender(employeeRegistrationDTO.getGender().toUpperCase(Locale.ROOT));
+        } else {
+            throw new RuntimeException("error");
+        }
 
         employeeDAO.employeeAdd(employee);
     }
