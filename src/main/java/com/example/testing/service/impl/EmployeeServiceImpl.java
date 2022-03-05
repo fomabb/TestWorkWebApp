@@ -55,7 +55,7 @@ public class EmployeeServiceImpl implements EmployerService {
                 employeeRegistrationDTO.getGender().equalsIgnoreCase("WOMEN")) {
             employee.setGender(employeeRegistrationDTO.getGender().toUpperCase(Locale.ROOT));
         } else {
-            throw new RuntimeException("error");
+            throw new NullPointerException("error");
         }
 
         employeeDAO.employeeAdd(employee);
