@@ -1,6 +1,6 @@
 package com.example.testing.controller;
 
-import com.example.testing.dto.EmployeerDataDTO;
+import com.example.testing.dto.EmployeeDataDTO;
 import com.example.testing.dto.EmployeeRegistrationDTO;
 import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.service.EmployerService;
@@ -24,12 +24,12 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<EmployeerDataDTO> getAllUser() {
+    public List<EmployeeDataDTO> getAllUser() {
         return userService.getAllEmployee();
     }
 
     @GetMapping("/{id}")
-    EmployeerDataDTO getById(@PathVariable long id) {
+    EmployeeDataDTO getById(@PathVariable long id) {
         return userService.getById(id);
     }
 

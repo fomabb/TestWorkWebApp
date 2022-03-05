@@ -1,6 +1,6 @@
 package com.example.testing.service;
 
-import com.example.testing.dto.EmployeerDataDTO;
+import com.example.testing.dto.EmployeeDataDTO;
 import com.example.testing.dto.EmployeeRegistrationDTO;
 import com.example.testing.dto.EmployeeUpdate;
 
@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface EmployerService {
 
-    List<EmployeerDataDTO> getAllEmployee();
+    List<EmployeeDataDTO> getAllEmployee();
 
-    EmployeerDataDTO getById(long id);
+    EmployeeDataDTO getById(long id);
 
     void employeeRegistration(EmployeeRegistrationDTO userRegistrationDTO);
 
