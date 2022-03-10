@@ -23,11 +23,6 @@ public class EmployeeRegistrationDTO {
 
     private int department_id;
 
-//    @Pattern(regexp = "^[a-zA-Z]{2,30}$")
-//    private String  job_title;
-
-
-
     private Job job_title;
 
     @Pattern(regexp = "^[a-zA-Z]{3,5}$")
