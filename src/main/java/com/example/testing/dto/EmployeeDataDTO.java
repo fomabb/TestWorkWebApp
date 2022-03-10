@@ -15,7 +15,7 @@ public class EmployeeDataDTO {
 
     private String last_name;
 
-    private String department_id;
+    private int department_id;
 
     private String job_title;
 

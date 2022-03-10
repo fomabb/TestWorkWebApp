@@ -38,9 +38,8 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public void employeeAdd(Employee employee) {
-//        System.out.println("1" + employee.toString());
         jdbcTemplate.update(ADD_USER_SQL, employee.getFirst_name(), employee.getLast_name(),
-                employee.getDepartment_id(), employee.getJob_title(), employee.getGender());
+                employee.getDepartment_id(), employee.getJob_title().toString(), employee.getGender());
     }
 
     @Override
@@ -51,6 +50,7 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public void updateEmployee(long id, EmployeeUpdate employee) {
-        jdbcTemplate.update(UPDATE_USER_SQL, employee.getDepartment_id(), employee.getJob_title(), id);
+        System.out.println(employee.toString());
+        jdbcTemplate.update(UPDATE_USER_SQL, employee.getDepartment_id(), employee.getJob_title().toString(), id);
     }
 }

@@ -15,9 +15,9 @@ public class Employee {
 
     private String last_name;
 
-    private String department_id;
+    private int department_id;
 
-    private String job_title;
+    private Job job_title;
 
     private String gender;
 }

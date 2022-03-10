@@ -1,9 +1,11 @@
 package com.example.testing.dto;
 
+import com.example.testing.model.Job;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -19,10 +21,14 @@ public class EmployeeRegistrationDTO {
     @Pattern(regexp = "^[a-zA-Z]{2,30}$")
     private String last_name;
 
-    private String department_id;
+    private int department_id;
 
-    @Pattern(regexp = "^[a-zA-Z]{2,30}$")
-    private String job_title;
+//    @Pattern(regexp = "^[a-zA-Z]{2,30}$")
+//    private String  job_title;
+
+
+
+    private Job job_title;
 
     @Pattern(regexp = "^[a-zA-Z]{3,5}$")
     private String gender;

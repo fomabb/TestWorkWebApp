@@ -5,6 +5,7 @@ import com.example.testing.dto.EmployeeDataDTO;
 import com.example.testing.dto.EmployeeRegistrationDTO;
 import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.model.Employee;
+import com.example.testing.model.Job;
 import com.example.testing.service.EmployerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class EmployeeServiceImpl implements EmployerService {
     public List<EmployeeDataDTO> getAllEmployee() {
         return employeeDAO.getAllEmployee().stream()
                 .map(employee -> new EmployeeDataDTO(employee.getEmployee_id(), employee.getFirst_name(),
-                        employee.getLast_name(), employee.getDepartment_id(), employee.getJob_title(),
+                        employee.getLast_name(), employee.getDepartment_id(), employee.getJob_title().toString(),
                         employee.getGender()))
                 .collect(Collectors.toList());
     }
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployerService {
         employeeDataDTO.setFirst_name(employee.getFirst_name());
         employeeDataDTO.setLast_name(employee.getLast_name());
         employeeDataDTO.setDepartment_id(employee.getDepartment_id());
-        employeeDataDTO.setJob_title(employee.getJob_title());
+        employeeDataDTO.setJob_title(employee.getJob_title().toString());
         employeeDataDTO.setGender(employee.getGender().toUpperCase(Locale.ROOT));
 
 
@@ -50,7 +51,25 @@ public class EmployeeServiceImpl implements EmployerService {
         employee.setFirst_name(employeeRegistrationDTO.getFirst_name());
         employee.setLast_name(employeeRegistrationDTO.getLast_name());
         employee.setDepartment_id(employeeRegistrationDTO.getDepartment_id());
-        employee.setJob_title(employeeRegistrationDTO.getJob_title());
+
+        switch (employee.getDepartment_id()) {
+            case 1:
+                employee.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            case 2:
+                employee.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            case 3:
+                employee.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            default:
+                throw new NullPointerException("error");
+        }
+
+
         if (employeeRegistrationDTO.getGender().equalsIgnoreCase("MEN") ||
                 employeeRegistrationDTO.getGender().equalsIgnoreCase("WOMEN")) {
             employee.setGender(employeeRegistrationDTO.getGender().toUpperCase(Locale.ROOT));
@@ -71,6 +90,26 @@ public class EmployeeServiceImpl implements EmployerService {
     @Override
     public void updateEmployee(long id, EmployeeUpdate employee) {
         getById(id);
+
+        switch (employee.getDepartment_id()) {
+
+            case 1:
+                employee.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            case 2:
+                employee.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            case 3:
+                employee.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
+                break;
+
+            default:
+                throw new NullPointerException("error");
+        }
+
+        System.out.println(employee.toString());
 
         employeeDAO.updateEmployee(id, employee);
     }
