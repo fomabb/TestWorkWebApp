@@ -5,7 +5,6 @@ import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.mapper.EmployeeRowMapper;
 import com.example.testing.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
