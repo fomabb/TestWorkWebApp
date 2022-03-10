@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployerService {
     public List<EmployeeDataDTO> getAllEmployee() {
         return employeeDAO.getAllEmployee().stream()
                 .map(employee -> new EmployeeDataDTO(employee.getEmployee_id(), employee.getFirst_name(),
-                        employee.getLast_name(), employee.getDepartment_id(), employee.getJob_title().toString(),
+                        employee.getLast_name(), employee.getDepartment_id(),employee.getJob_title(),
                         employee.getGender()))
                 .collect(Collectors.toList());
     }
@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployerService {
         employeeDataDTO.setFirst_name(employee.getFirst_name());
         employeeDataDTO.setLast_name(employee.getLast_name());
         employeeDataDTO.setDepartment_id(employee.getDepartment_id());
-        employeeDataDTO.setJob_title(employee.getJob_title().toString());
+        employeeDataDTO.setJob_title(employee.getJob_title());
         employeeDataDTO.setGender(employee.getGender().toUpperCase(Locale.ROOT));
 
 
@@ -108,8 +108,6 @@ public class EmployeeServiceImpl implements EmployerService {
             default:
                 throw new NullPointerException("error");
         }
-
-        System.out.println(employee.toString());
 
         employeeDAO.updateEmployee(id, employee);
     }

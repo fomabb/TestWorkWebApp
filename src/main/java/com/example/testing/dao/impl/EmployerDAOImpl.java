@@ -26,7 +26,7 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public List<Employee> getAllEmployee() {
-        return jdbcTemplate.query(GET_ALL_USER_SQL, new BeanPropertyRowMapper<>(Employee.class));
+        return jdbcTemplate.query(GET_ALL_USER_SQL, new EmployeeRowMapper());
     }
 
     @Override
