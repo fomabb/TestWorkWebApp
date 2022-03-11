@@ -111,4 +111,13 @@ public class EmployeeServiceImpl implements EmployerService {
 
         employeeDAO.updateEmployee(id, employee);
     }
+
+    @Override
+    public List<EmployeeDataDTO> getDepartmentId(int id) {
+        return employeeDAO.getDepartmentId(id).stream()
+                .map(employee -> new EmployeeDataDTO(employee.getEmployee_id(), employee.getFirst_name(),
+                        employee.getLast_name(), employee.getDepartment_id(),employee.getJob_title(),
+                        employee.getGender()))
+                .collect(Collectors.toList());
+    }
 }

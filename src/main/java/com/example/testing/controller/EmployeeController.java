@@ -16,7 +16,7 @@ import java.util.List;
 @Validated
 public class EmployeeController {
 
-    private final EmployerService userService;
+    private final EmployerService employerService;
 
     @GetMapping("/hello")
     public String read() {
@@ -25,26 +25,31 @@ public class EmployeeController {
 
     @GetMapping
     public List<EmployeeDataDTO> getAllEmployee() {
-        return userService.getAllEmployee();
+        return employerService.getAllEmployee();
     }
 
     @GetMapping("/{id}")
     EmployeeDataDTO getById(@PathVariable long id) {
-        return userService.getById(id);
+        return employerService.getById(id);
     }
 
     @PostMapping("/add")
     void employeeRegistration(@Validated @RequestBody EmployeeRegistrationDTO employee) {
-        userService.employeeRegistration(employee);
+        employerService.employeeRegistration(employee);
     }
 
     @DeleteMapping("/{id}")
     String employeeDelete(@PathVariable("id") long id) {
-       return userService.employeeDelete(id);
+       return employerService.employeeDelete(id);
     }
 
     @PutMapping("/{id}")
     void updateEmployee(@Validated @PathVariable long id, @RequestBody EmployeeUpdate employee) {
-        userService.updateEmployee(id, employee);
+        employerService.updateEmployee(id, employee);
+    }
+
+    @GetMapping("department/{id}")
+    List<EmployeeDataDTO> getDepartmentId(@PathVariable int id) {
+        return employerService.getDepartmentId(id);
     }
 }

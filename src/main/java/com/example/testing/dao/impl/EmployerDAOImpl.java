@@ -22,6 +22,7 @@ public class EmployerDAOImpl implements EmployeeDAO {
     private static final String GET_BY_ID_SQL = "SELECT * FROM employee WHERE employee_id=?";
     private static final String DELETE_USER_SQL = "DELETE FROM employee WHERE employee_id=?";
     private static final String UPDATE_USER_SQL = "UPDATE employee SET department_id=?, job_title=? WHERE employee_id=?";
+    private static final String GET_DEPARTMENT_ID_SQL = "SELECT * FROM employee WHERE department_id=?";
 
     @Override
     public List<Employee> getAllEmployee() {
@@ -51,5 +52,10 @@ public class EmployerDAOImpl implements EmployeeDAO {
     public void updateEmployee(long id, EmployeeUpdate employee) {
         System.out.println(employee.toString());
         jdbcTemplate.update(UPDATE_USER_SQL, employee.getDepartment_id(), employee.getJob_title().toString(), id);
+    }
+
+    @Override
+    public List<Employee> getDepartmentId(int id) {
+        return jdbcTemplate.query(GET_DEPARTMENT_ID_SQL, new Object[]{id}, new EmployeeRowMapper());
     }
 }

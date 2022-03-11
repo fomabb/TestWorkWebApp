@@ -17,4 +17,6 @@ public interface EmployerService {
     String employeeDelete(long id);
 
     void updateEmployee(long id, EmployeeUpdate user);
+
+    List<EmployeeDataDTO> getDepartmentId(int id);
 }

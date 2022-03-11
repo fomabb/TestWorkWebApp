@@ -16,4 +16,6 @@ public interface EmployeeDAO {
     void employeeDelete(long id);
 
     void updateEmployee(long id, EmployeeUpdate user);
+
+    List<Employee> getDepartmentId(int id);
 }
