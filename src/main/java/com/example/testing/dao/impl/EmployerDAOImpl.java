@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -30,10 +31,9 @@ public class EmployerDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee getById(long id) {
+    public Optional<Employee> getById(long id) {
         return jdbcTemplate.query(GET_BY_ID_SQL, new Object[]{id}, new EmployeeRowMapper()).stream()
-                .findAny()
-                .orElse(null);
+                .findAny();
     }
 
     @Override
@@ -44,7 +44,6 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public void employeeDelete(long id) {
-        System.out.println(id);
         jdbcTemplate.update(DELETE_USER_SQL, id);
     }
 

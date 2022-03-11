@@ -4,12 +4,13 @@ import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.model.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeDAO {
 
     List<Employee> getAllEmployee();
 
-    Employee getById(long id);
+    Optional<Employee> getById(long id);
 
     void employeeAdd(Employee user);
 
