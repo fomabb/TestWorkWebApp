@@ -33,7 +33,7 @@ public class EmployeeController {
         return employerService.getById(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     void employeeRegistration(@Validated @RequestBody EmployeeRegistrationDTO employee) {
         employerService.employeeRegistration(employee);
     }

@@ -30,3 +30,4 @@ GET | /api/users/{id} | get employee by id
 GET | /api/users/department/{id} | get employee by department by id
 
 ### My application requests in Postman
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d9af219fea3fe665c736?action=collection%2Fimport)
