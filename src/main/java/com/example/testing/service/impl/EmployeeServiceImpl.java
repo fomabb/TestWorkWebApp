@@ -33,7 +33,6 @@ public class EmployeeServiceImpl implements EmployerService {
     }
 
 
-
     @Override
     public EmployeeDataDTO getById(long id) {
         EmployeeDataDTO employeeDataDTO = new EmployeeDataDTO();
@@ -74,7 +73,6 @@ public class EmployeeServiceImpl implements EmployerService {
             default:
                 throw new NullPointerException("error");
         }
-
 
         if (employeeRegistrationDTO.getGender().equalsIgnoreCase("MEN") ||
                 employeeRegistrationDTO.getGender().equalsIgnoreCase("WOMEN")) {
@@ -127,3 +125,4 @@ public class EmployeeServiceImpl implements EmployerService {
                 .collect(Collectors.toList());
     }
 }
+

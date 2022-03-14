@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -14,9 +15,11 @@ public class EmployeeRegistrationDTO {
 
     private long employee_id;
 
+    @NotEmpty
     @Pattern(regexp = "^[a-zA-Z]{2,30}$")
     private String first_name;
 
+    @NotEmpty
     @Pattern(regexp = "^[a-zA-Z]{2,30}$")
     private String last_name;
 
@@ -24,6 +27,7 @@ public class EmployeeRegistrationDTO {
 
     private Job job_title;
 
+    @NotEmpty
     @Pattern(regexp = "^[a-zA-Z]{3,5}$")
     private String gender;
 }

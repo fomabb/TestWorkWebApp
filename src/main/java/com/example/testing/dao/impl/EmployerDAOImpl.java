@@ -4,7 +4,7 @@ import com.example.testing.dao.EmployeeDAO;
 import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.mapper.EmployeeRowMapper;
 import com.example.testing.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +13,9 @@ import java.util.Optional;
 
 
 @Repository
+@AllArgsConstructor
 public class EmployerDAOImpl implements EmployeeDAO {
 
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private static final String GET_ALL_USER_SQL = "SELECT * FROM employee";

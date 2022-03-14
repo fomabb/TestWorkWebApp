@@ -40,7 +40,7 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     String employeeDelete(@PathVariable("id") long id) {
-       return employerService.employeeDelete(id);
+        return employerService.employeeDelete(id);
     }
 
     @PutMapping("/{id}")
@@ -49,7 +49,7 @@ public class EmployeeController {
     }
 
     @GetMapping("department/{id}")
-    List<EmployeeDataDTO> getDepartmentId(@PathVariable int id) {
+    List<EmployeeDataDTO> getDepartmentId(@Validated @PathVariable int id) {
         return employerService.getDepartmentId(id);
     }
 }
