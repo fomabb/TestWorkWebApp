@@ -5,7 +5,7 @@
   - MySQL DB 
   - Spring Boot
 ### Short description of the project
-MainApp
+  - Standalone application providing REST API
 
 ### Prerequisites:
 - Java 11
