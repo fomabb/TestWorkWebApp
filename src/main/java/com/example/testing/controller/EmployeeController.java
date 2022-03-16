@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -24,7 +26,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    EmployeeDataDTO getById(@PathVariable long id) {
+    EmployeeDataDTO getById(@PathVariable("id") @Valid @Min(1) long id) {
         return employerService.getById(id);
     }
 
@@ -34,17 +36,17 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    String employeeDelete(@PathVariable("id") long id) {
+    String employeeDelete(@PathVariable("id") @Valid @Min(1) long id) {
         return employerService.employeeDelete(id);
     }
 
     @PutMapping("/{id}")
-    void updateEmployee(@Validated @PathVariable long id, @RequestBody EmployeeUpdate employee) {
+    void updateEmployee(@PathVariable("id") @Valid @Min(1) long id, @RequestBody EmployeeUpdate employee) {
         employerService.updateEmployee(id, employee);
     }
 
     @GetMapping("department/{id}")
-    List<EmployeeDataDTO> getDepartmentId(@Validated @PathVariable int id) {
+    List<EmployeeDataDTO> getDepartmentId(@PathVariable("id") @Valid @Min(1) int id) {
         return employerService.getDepartmentId(id);
     }
 }

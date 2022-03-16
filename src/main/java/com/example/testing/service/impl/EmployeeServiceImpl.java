@@ -32,7 +32,6 @@ public class EmployeeServiceImpl implements EmployerService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public EmployeeDataDTO getById(long id) {
         EmployeeDataDTO employeeDataDTO = new EmployeeDataDTO();
@@ -71,14 +70,14 @@ public class EmployeeServiceImpl implements EmployerService {
                 break;
 
             default:
-                throw new NullPointerException("error");
+                throw new EntityNotFoundException(ExceptionCode.NOT_EXISTING_EMPLOYEE.getErrorCode());
         }
 
         if (employeeRegistrationDTO.getGender().equalsIgnoreCase("MEN") ||
                 employeeRegistrationDTO.getGender().equalsIgnoreCase("WOMEN")) {
             employee.setGender(employeeRegistrationDTO.getGender().toUpperCase(Locale.ROOT));
         } else {
-            throw new NullPointerException("error");
+            throw new EntityNotFoundException(ExceptionCode.NOT_EXISTING_GENDER.getErrorCode());
         }
 
         employeeDAO.employeeAdd(employee);
@@ -86,6 +85,7 @@ public class EmployeeServiceImpl implements EmployerService {
 
     @Override
     public String employeeDelete(long id) {
+        getById(id);
         employeeDAO.employeeDelete(id);
 
         return "delete employee with id " + id;
@@ -110,7 +110,7 @@ public class EmployeeServiceImpl implements EmployerService {
                 break;
 
             default:
-                throw new NullPointerException("error");
+                throw new EntityNotFoundException(ExceptionCode.NOT_EXISTING_DEPARTMENT.getErrorCode());
         }
 
         employeeDAO.updateEmployee(id, employeeUpdate);
@@ -118,11 +118,17 @@ public class EmployeeServiceImpl implements EmployerService {
 
     @Override
     public List<EmployeeDataDTO> getDepartmentId(int id) {
-        return employeeDAO.getDepartmentId(id).stream()
+
+        List<EmployeeDataDTO> employeeDataDTO = employeeDAO.getDepartmentId(id).stream()
                 .map(employee -> new EmployeeDataDTO(employee.getEmployee_id(), employee.getFirst_name(),
                         employee.getLast_name(), employee.getDepartment_id(), employee.getJob_title(),
                         employee.getGender()))
                 .collect(Collectors.toList());
+        if (employeeDataDTO.size() != 0) {
+            return employeeDataDTO;
+        } else {
+            throw new EntityNotFoundException(ExceptionCode.NOT_EXISTING_DEPARTMENT.getErrorCode());
+        }
     }
 }
 

@@ -14,10 +14,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolationException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,22 +30,13 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ExceptionResponse> entityNotFoundHandler(EntityNotFoundException e) {
+    public ResponseEntity<ExceptionResponse> entityNotFoundHandler(EntityNotFoundException e, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
-        response.setException(e.getClass().getName());
+        response.setException(e.getClass().getSimpleName());
         response.setErrorCode(e.getMessage());
-
-        String message = "";
-        switch (e.getMessage()) {
-            case "4000":
-                message = "Employee Not Found";
-                break;
-            case "4001":
-                message = "Department Not Found";
-                break;
-        }
-
+        String message = messageSource.getMessage(e.getMessage(), null, request.getLocale());
         response.setMessage(message);
+        log.error(" Not found ", e);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -53,8 +44,8 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ExceptionResponse> sqlExceptionHandler(SQLException e, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(e.getClass().getSimpleName());
-        response.setErrorCode("3");
-        response.setMessage(messageSource.getMessage("3", null, request.getLocale()));
+        response.setErrorCode("4003");
+        response.setMessage(messageSource.getMessage("4003", null, request.getLocale()));
         log.error("SQL exception", e);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -63,8 +54,8 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ExceptionResponse> entityAlreadyExistHandler(DuplicateKeyException e, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(e.getClass().getSimpleName());
-        response.setErrorCode("5");
-        response.setMessage(messageSource.getMessage("5", null, request.getLocale()));
+        response.setErrorCode("4004");
+        response.setMessage(messageSource.getMessage("4004", null, request.getLocale()));
         log.error("ALREADY EXIST EXCEPTION: ", e);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -89,19 +80,9 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(ex.getClass().getSimpleName());
-        response.setErrorCode("6");
-        response.setMessage(messageSource.getMessage("6", null, request.getLocale()));
+        response.setErrorCode("4005");
+        response.setMessage(messageSource.getMessage("4005", null, request.getLocale()));
         log.error("BAD_REQUEST", ex);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex,
-                                                                   HttpHeaders headers,
-                                                                   HttpStatus status,
-                                                                   WebRequest request) {
-        ExceptionResponse response = new ExceptionResponse();
-        response.setMessage("error");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -109,8 +90,8 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(ex.getClass().getSimpleName());
-        response.setErrorCode("7");
-        response.setMessage(messageSource.getMessage("7", null, request.getLocale()));
+        response.setErrorCode("4006");
+        response.setMessage(messageSource.getMessage("4006", null, request.getLocale()));
         log.error("BAD_REQUEST", ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -122,9 +103,20 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                                                                          WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(ex.getClass().getSimpleName());
-        response.setErrorCode("4");
-        response.setMessage(messageSource.getMessage("4", null, request.getLocale()));
+        response.setErrorCode("4007");
+        response.setMessage(messageSource.getMessage("4007", null, request.getLocale()));
         log.error("NOT_ALLOWED", ex);
         return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> constraintHandle(ConstraintViolationException ex) {
+        List<ExceptionResponse> responses = ex.getConstraintViolations()
+                .stream()
+                .map(error -> new ExceptionResponse(error.getMessage(),
+                        null, null))
+                .collect(Collectors.toList());
+        log.info(" Validation error ", ex);
+        return new ResponseEntity<>(responses, HttpStatus.BAD_REQUEST);
     }
 }
