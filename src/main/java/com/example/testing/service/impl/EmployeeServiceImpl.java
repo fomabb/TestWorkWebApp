@@ -92,28 +92,28 @@ public class EmployeeServiceImpl implements EmployerService {
     }
 
     @Override
-    public void updateEmployee(long id, EmployeeUpdate employee) {
+    public void updateEmployee(long id, EmployeeUpdate employeeUpdate) {
         getById(id);
 
-        switch (employee.getDepartment_id()) {
+        switch (employeeUpdate.getDepartment_id()) {
 
             case 1:
-                employee.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 2:
-                employee.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 3:
-                employee.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             default:
                 throw new NullPointerException("error");
         }
 
-        employeeDAO.updateEmployee(id, employee);
+        employeeDAO.updateEmployee(id, employeeUpdate);
     }
 
     @Override

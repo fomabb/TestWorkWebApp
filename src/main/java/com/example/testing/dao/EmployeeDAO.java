@@ -12,11 +12,11 @@ public interface EmployeeDAO {
 
     Optional<Employee> getById(long id);
 
-    void employeeAdd(Employee user);
+    void employeeAdd(Employee employee);
 
     void employeeDelete(long id);
 
-    void updateEmployee(long id, EmployeeUpdate user);
+    void updateEmployee(long id, EmployeeUpdate employeeUpdate);
 
     List<Employee> getDepartmentId(int id);
 }

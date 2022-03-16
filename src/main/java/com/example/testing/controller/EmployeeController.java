@@ -18,11 +18,6 @@ public class EmployeeController {
 
     private final EmployerService employerService;
 
-    @GetMapping("/hello")
-    public String read() {
-        return "Hello";
-    }
-
     @GetMapping
     public List<EmployeeDataDTO> getAllEmployee() {
         return employerService.getAllEmployee();

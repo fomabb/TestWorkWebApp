@@ -12,11 +12,11 @@ public interface EmployerService {
 
     EmployeeDataDTO getById(long id);
 
-    void employeeRegistration(EmployeeRegistrationDTO userRegistrationDTO);
+    void employeeRegistration(EmployeeRegistrationDTO employeeRegistrationDTO);
 
     String employeeDelete(long id);
 
-    void updateEmployee(long id, EmployeeUpdate user);
+    void updateEmployee(long id, EmployeeUpdate employeeUpdate);
 
     List<EmployeeDataDTO> getDepartmentId(int id);
 }
