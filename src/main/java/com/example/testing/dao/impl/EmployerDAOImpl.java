@@ -49,7 +49,6 @@ public class EmployerDAOImpl implements EmployeeDAO {
 
     @Override
     public void updateEmployee(long id, EmployeeUpdate employee) {
-        System.out.println(employee.toString());
         jdbcTemplate.update(UPDATE_USER_SQL, employee.getDepartment_id(), employee.getJob_title().toString(), id);
     }
 
