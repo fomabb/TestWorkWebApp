@@ -1,6 +1,6 @@
 package com.example.testing.dto;
 
-import com.example.testing.model.Job;
+import com.example.testing.model.JobTitle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ public class EmployeeDataDTO {
 
     private int department_id;
 
-    private Job job_title;
+    private JobTitle job_title;
 
     private String gender;
 }

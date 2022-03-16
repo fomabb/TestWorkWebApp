@@ -17,7 +17,7 @@ public class Employee {
 
     private int department_id;
 
-    private Job job_title;
+    private JobTitle job_title;
 
     private String gender;
 }

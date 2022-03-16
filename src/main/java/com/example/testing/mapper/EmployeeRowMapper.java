@@ -1,7 +1,7 @@
 package com.example.testing.mapper;
 
 import com.example.testing.model.Employee;
-import com.example.testing.model.Job;
+import com.example.testing.model.JobTitle;
 import com.example.testing.util.constant.employeeConstant;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -17,7 +17,7 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
         employee.setFirst_name(rs.getString(employeeConstant.NAME));
         employee.setLast_name(rs.getString(employeeConstant.SURNAME));
         employee.setDepartment_id(rs.getInt(employeeConstant.DEPORT_ID));
-        employee.setJob_title(Job.valueOf(rs.getString(employeeConstant.JOB).toUpperCase(Locale.ROOT)));
+        employee.setJob_title(JobTitle.valueOf(rs.getString(employeeConstant.JOB).toUpperCase(Locale.ROOT)));
         employee.setGender(rs.getString(employeeConstant.GENDER));
 
         return employee;

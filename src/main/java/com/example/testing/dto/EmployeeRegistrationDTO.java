@@ -1,6 +1,6 @@
 package com.example.testing.dto;
 
-import com.example.testing.model.Job;
+import com.example.testing.model.JobTitle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class EmployeeRegistrationDTO {
 
     private int department_id;
 
-    private Job job_title;
+    private JobTitle job_title;
 
     @NotEmpty
     @Pattern(regexp = "^[a-zA-Z]{3,5}$")

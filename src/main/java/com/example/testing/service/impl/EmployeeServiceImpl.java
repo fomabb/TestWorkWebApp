@@ -6,7 +6,7 @@ import com.example.testing.dto.EmployeeRegistrationDTO;
 import com.example.testing.dto.EmployeeUpdate;
 import com.example.testing.exception.ExceptionCode;
 import com.example.testing.model.Employee;
-import com.example.testing.model.Job;
+import com.example.testing.model.JobTitle;
 import com.example.testing.service.EmployerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,15 +59,15 @@ public class EmployeeServiceImpl implements EmployerService {
         switch (employee.getDepartment_id()) {
 
             case 1:
-                employee.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
+                employee.setJob_title(JobTitle.valueOf(JobTitle.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 2:
-                employee.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
+                employee.setJob_title(JobTitle.valueOf(JobTitle.TESTER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 3:
-                employee.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
+                employee.setJob_title(JobTitle.valueOf(JobTitle.MANAGER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             default:
@@ -98,15 +98,15 @@ public class EmployeeServiceImpl implements EmployerService {
         switch (employeeUpdate.getDepartment_id()) {
 
             case 1:
-                employeeUpdate.setJob_title(Job.valueOf(Job.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(JobTitle.valueOf(JobTitle.DEVELOPER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 2:
-                employeeUpdate.setJob_title(Job.valueOf(Job.TESTER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(JobTitle.valueOf(JobTitle.TESTER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             case 3:
-                employeeUpdate.setJob_title(Job.valueOf(Job.MANAGER.toString().toUpperCase(Locale.ROOT)));
+                employeeUpdate.setJob_title(JobTitle.valueOf(JobTitle.MANAGER.toString().toUpperCase(Locale.ROOT)));
                 break;
 
             default:

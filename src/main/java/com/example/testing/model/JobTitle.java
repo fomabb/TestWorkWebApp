@@ -1,6 +1,6 @@
 package com.example.testing.model;
 
-public enum Job {
+public enum JobTitle {
     DEVELOPER,
     TESTER,
     MANAGER
