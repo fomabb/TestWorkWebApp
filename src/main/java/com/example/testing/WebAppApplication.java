@@ -13,21 +13,21 @@ import java.util.Locale;
 @SpringBootApplication
 public class WebAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebAppApplication.class, args);
+    }
 
-	@Bean
-	public MessageSource messageSource (){
-		ResourceBundleMessageSource messageSource  =   new   ResourceBundleMessageSource ();
-		messageSource . setBasename( " message_source/messages " );
-		messageSource . setDefaultEncoding( StandardCharsets. UTF_8 . name());
-		messageSource . setDefaultLocale( Locale. ENGLISH );
-		return  messageSource;
-	}
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename(" message_source/messages ");
+        messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        messageSource.setDefaultLocale(Locale.ENGLISH);
+        return messageSource;
+    }
 
-	@Bean
-	public MethodValidationPostProcessor methodValidationPostProcessor (){
-		return   new   MethodValidationPostProcessor ();
-	}
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
+    }
 }

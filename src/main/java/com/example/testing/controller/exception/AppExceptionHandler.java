@@ -87,7 +87,10 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex,
+                                                        HttpHeaders headers,
+                                                        HttpStatus status,
+                                                        WebRequest request) {
         ExceptionResponse response = new ExceptionResponse();
         response.setException(ex.getClass().getSimpleName());
         response.setErrorCode("4006");
