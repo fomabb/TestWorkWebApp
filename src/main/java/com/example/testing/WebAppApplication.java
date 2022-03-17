@@ -20,7 +20,7 @@ public class WebAppApplication {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(" message_source/messages ");
+        messageSource.setBasename("message_source/messages");
         messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
         messageSource.setDefaultLocale(Locale.ENGLISH);
         return messageSource;
